@@ -18,3 +18,18 @@ document.getElementById("cards").onmousemove = e => {
       card.style.setProperty("--mouse-y", `${y}px`);
     };
   }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdownButton = document.getElementById("dropdownButton");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    dropdownButton.addEventListener("click", () => {
+        dropdownMenu.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!dropdownButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+            dropdownMenu.classList.remove("show");
+        }
+    });
+});

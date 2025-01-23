@@ -28,7 +28,7 @@ if (!isset($_SESSION['csrf_token'])) {
                 <div class="card-info-wrapper">
                     <div class="card-info-title">
                         <h3>Create an Account</h3>
-                        <h4>Already have an account? <a href="#">Log in</a></h4>
+                        <h4>Already have an account? <a href="login.php">Log in</a></h4>
                     </div>
                 </div>
                 <form class="login-form" action="./php/signup.php" method="POST">
@@ -37,9 +37,11 @@ if (!isset($_SESSION['csrf_token'])) {
                         <input type="text" name="last_name" placeholder="Last Name" class="input-field" required>
                     </div>
                     <input type="email" name="email" placeholder="Email" class="input-field" required>
+                    <p style="color: red;"><?php echo htmlspecialchars(string: $emailErr); ?></p>
+
                     <input type="password" name="password" placeholder="Enter your password" class="input-field" required>
                     <input type="password" name="password-repeat" placeholder="Repeat your password" class="input-field" required>
-                    <p style="color: red;"><?php echo htmlspecialchars($passwordErr); ?></p>
+                    <p style="color: red;"><?php echo htmlspecialchars(string: $passwordErr); ?></p>
                     <div class="checkbox-row">
                         <input type="checkbox" id="terms" required>
                         <label for="terms">I agree to the Terms & Conditions</label>
@@ -47,11 +49,6 @@ if (!isset($_SESSION['csrf_token'])) {
                     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                     <button type="submit" name="submit" class="login-button">Create Account</button>
                 </form>
-
-                <div class="social-login">
-                    <button class="social-button google">Register with Google</button>
-                    <button class="social-button apple">Register with Apple</button>
-                </div>
             </div>
         </div>
     </div>
