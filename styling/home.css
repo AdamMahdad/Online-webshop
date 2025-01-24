@@ -54,28 +54,36 @@ body{
     );
 }
   
-.page-fade::after {
+/* .page-fade::after {
     content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 200px;
-    background: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0)  100%);
     z-index: 10;
     pointer-events: none;
-}
+} */
 
 .card{
     background-color: rgb(23, 23, 23);
 }
 
+.wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  overflow: hidden;
+  --fade-amount: 5%;
+  mask-image: linear-gradient(to left, transparent, black var(--fade-amount), black calc(100% - var(--fade-amount)), transparent);
+  -webkit-mask-image: linear-gradient(to left, transparent, black var(--fade-amount), black calc(100% - var(--fade-amount)), transparent);
+}
+
 #cards {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;  
-    max-width: 916px;
-    width: calc(100% - 20px);
+    gap: 8px;
   }
   
   #cards:hover > .card::after {
@@ -87,10 +95,10 @@ body{
     border-radius: 10px;
     cursor: pointer;
     display: flex;
-    height: 260px;
+    height: 500px;
     flex-direction: column;
     position: relative;
-    width: 300px;  
+    width: 280px;  
   }
   
   .card:hover::before {

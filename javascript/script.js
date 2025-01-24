@@ -33,3 +33,29 @@ document.getElementById("cards").onmousemove = e => {
         }
     });
 });
+
+
+const swiper = new Swiper('.mySwiper', {
+    slidesPerView: 3, // Aantal zichtbare slides
+    spaceBetween: 10, // Ruimte tussen slides
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+      },
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      },
+    },
+  });
+  
