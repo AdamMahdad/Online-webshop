@@ -42,7 +42,7 @@
     display: none;
 }
 body{
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(16,18,24);
 }
 .page-1{
     background-image: radial-gradient(
@@ -70,7 +70,7 @@ body{
     background-color: rgb(23, 23, 23);
 }
 
-.wrapper{
+/* .wrapper{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,11 +79,12 @@ body{
   --fade-amount: 5%;
   mask-image: linear-gradient(to left, transparent, black var(--fade-amount), black calc(100% - var(--fade-amount)), transparent);
   -webkit-mask-image: linear-gradient(to left, transparent, black var(--fade-amount), black calc(100% - var(--fade-amount)), transparent);
-}
+} */
 
 #cards {
     display: flex;
     gap: 8px;
+    overflow: hidden;
   }
   
   #cards:hover > .card::after {
@@ -98,7 +99,7 @@ body{
     height: 500px;
     flex-direction: column;
     position: relative;
-    width: 280px;  
+    width: 360px;  
   }
   
   .card:hover::before {
@@ -261,3 +262,73 @@ body{
     }
   }
   
+  @media (max-width: 500px) {
+    #cards {
+      flex-direction: column; /* Zet de cards onder elkaar */
+      align-items: center; /* Centreer de cards */
+    }
+  
+    .card {
+      width: 100%; /* Maak de card breedte 100% van de container */
+      height: auto; /* Pas de hoogte automatisch aan */
+      margin-bottom: 16px; /* Voeg wat ruimte tussen de cards toe */
+    }
+  
+    .card:not(:first-child) {
+      display: none; /* Verberg alle cards behalve de eerste */
+    }
+  }
+
+  .window-outline {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    outline-offset: -1px;
+    background-image: radial-gradient(circle farthest-side at 50% 0, #f2f2f233, #0000);
+    border-radius: 24px;
+    outline: 2px solid #f2f2f226;
+    padding: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 0 8px #0006, 0 0 60px #0003, 0 30px 120px #000c;
+  
+  }
+  .window-main {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid #f2f2f24d;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px #0000001a, 0 0 12px #0006;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    inset: 0;
+
+    
+  }
+  .card {
+    height: 600px;
+    width: 360px;
+}
+
+.card-image {
+    height: 400px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.card:hover .card-image img {
+    transform: scale(1.05);
+    filter: brightness(0.9);
+}
+
+.wrapper{
+    display: flex;
+    overflow: hidden;
+}
