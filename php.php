@@ -1,3 +1,26 @@
+<?php
+
+require_once('./php/login.php');
+require_once('./php/signup.php');
+
+if (!isset($_SESSION['loggedIn']) && isset($_COOKIE['remember_me'])) {
+  try {
+    $stmt = $pdo->prepare('SELECT * FROM users WHERE remember_token = :token');
+    $stmt->execute(['token' => $_COOKIE['remember_me']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+      $_SESSION['email'] = $user['email'];
+      $_SESSION['first_name'] = $user['first_name'];
+      $_SESSION['last_name'] = $user['last_name'];
+      $_SESSION['loggedIn'] = true;
+    }
+  } catch (PDOException $e) {
+  }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -182,54 +205,6 @@
     </div>
   </div>
 
-  <!-- Add this to your HTML body before the closing body tag -->
-<!-- Shopping Cart Sidebar -->
-<div id="cart-sidebar" class="cart-sidebar glass fixed top-0 right-0 h-full w-0 overflow-hidden transition-all duration-300 z-50">
-  <div class="p-6 h-full flex flex-col">
-    <div class="flex justify-between items-center mb-6">
-      <h2 class="text-2xl font-medium">Your Cart</h2>
-      <button id="close-cart" class="text-white hover:text-gray-300">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-    
-    <div id="cart-items" class="flex-grow overflow-y-auto mb-4">
-      <!-- Cart items will be dynamically added here -->
-      <div id="empty-cart-message" class="text-center py-8 text-gray-400">
-        Your cart is empty
-      </div>
-    </div>
-    
-    <div class="border-t border-gray-700 pt-4 mb-4">
-      <div class="flex justify-between mb-2">
-        <span>Subtotal:</span>
-        <span id="cart-subtotal">$0.00</span>
-      </div>
-      <div class="flex justify-between mb-4">
-        <span>Tax (10%):</span>
-        <span id="cart-tax">$0.00</span>
-      </div>
-      <div class="flex justify-between text-lg font-bold">
-        <span>Total:</span>
-        <span id="cart-total">$0.00</span>
-      </div>
-    </div>
-    
-    <div class="flex flex-col gap-3">
-      <button id="checkout-btn" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
-        Checkout
-      </button>
-      <button id="continue-shopping" class="border border-white text-white px-4 py-2 rounded-lg font-medium hover:bg-white hover:bg-opacity-10 transition-all duration-300">
-        Continue Shopping
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- Add overlay for background dimming -->
-<div id="cart-overlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none transition-opacity duration-300 z-40"></div>
   <script src="javascript/script.js"></script>
 </body>
 </html>
